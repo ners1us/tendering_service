@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: enrich-organization
+      author: ners1us
+      changes:
+        - sql:
+            splitStatements: false
+            sql: |
+              INSERT INTO organization (id, name, description, type, created_at, updated_at) VALUES
+              ('550e8400-e29b-41d4-a716-446655440020', 'Organization 1', 'Description 1', 'LLC', '2024-09-14 14:09:16.941457', '2024-09-14 14:09:16.941457'),
+              ('550e8400-e29b-41d4-a716-446655440021', 'Organization 2', 'Description 2', 'IE', '2024-09-14 14:09:16.941457', '2024-09-14 14:09:16.941457'),
+              ('550e8400-e29b-41d4-a716-446655440022', 'Organization 3', 'Description 3', 'JSC', '2024-09-14 14:09:16.941457', '2024-09-14 14:09:16.941457'),
+              ('550e8400-e29b-41d4-a716-446655440023', 'Organization 4', 'Description 4', 'LLC', '2024-09-14 14:09:16.941457', '2024-09-14 14:09:16.941457');

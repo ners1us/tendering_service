@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-bid
+      author: ners1us
+      changes:
+        - createTable:
+            tableName: bid
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tender_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: organization_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author_type
+                  type: VARCHAR(50)
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+              - column:
+                  name: version
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: author_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: decision
+                  type: VARCHAR(50)
+              - column:
+                  name: feedback
+                  type: VARCHAR(255)

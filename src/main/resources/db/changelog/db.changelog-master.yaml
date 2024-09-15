@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-employee-table.yaml
+  - include:
+      file: db/changelog/changeset/create-organization-table.yaml
+  - include:
+      file: db/changelog/changeset/create-organization_responsible-table.yaml
+  - include:
+      file: db/changelog/changeset/create-bid-table.yaml
+  - include:
+      file: db/changelog/changeset/create-bid_history-table.yaml
+  - include:
+      file: db/changelog/changeset/create-tender-table.yaml
+  - include:
+      file: db/changelog/changeset/create-tender_history-table.yaml
+  - include:
+      file: db/changelog/changeset/enrich-employee-table.yaml
+  - include:
+      file: db/changelog/changeset/enrich-organization-table.yaml
+  - include:
+      file: db/changelog/changeset/enrich-organization_responsible-table.yaml
