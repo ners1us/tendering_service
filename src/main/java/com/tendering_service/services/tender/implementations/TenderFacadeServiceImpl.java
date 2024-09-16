@@ -1,12 +1,9 @@
 package com.tendering_service.services.tender.implementations;
 
-import com.tendering_service.services.tender.TenderDataManagerService;
-import com.tendering_service.services.tender.TenderDatabaseService;
-import com.tendering_service.services.tender.TenderFacadeService;
-import com.tendering_service.services.tender.TenderStatusManagerService;
 import com.tendering_service.dto.TenderDto;
 import com.tendering_service.enums.TenderStatus;
 import com.tendering_service.requests.TenderEditRequest;
+import com.tendering_service.services.tender.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

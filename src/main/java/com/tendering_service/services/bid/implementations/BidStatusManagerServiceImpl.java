@@ -1,12 +1,12 @@
 package com.tendering_service.services.bid.implementations;
 
+import com.tendering_service.services.bid.BidStatusManagerService;
 import com.tendering_service.dto.BidDto;
 import com.tendering_service.entities.Bid;
 import com.tendering_service.enums.BidStatus;
 import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.BidRepository;
 import com.tendering_service.repositories.EmployeeRepository;
-import com.tendering_service.services.bid.BidStatusManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,4 +50,3 @@ public class BidStatusManagerServiceImpl implements BidStatusManagerService {
         return bid.getStatus().name();
     }
 }
-

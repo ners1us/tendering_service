@@ -1,5 +1,7 @@
 package com.tendering_service.services.bid.implementations;
 
+import com.tendering_service.services.other.DataValidatorService;
+import com.tendering_service.services.bid.BidDataManagerService;
 import com.tendering_service.dto.BidDto;
 import com.tendering_service.entities.Bid;
 import com.tendering_service.entities.BidHistory;
@@ -9,7 +11,6 @@ import com.tendering_service.repositories.BidHistoryRepository;
 import com.tendering_service.repositories.BidRepository;
 import com.tendering_service.repositories.EmployeeRepository;
 import com.tendering_service.requests.BidEditRequest;
-import com.tendering_service.services.bid.BidDataManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,9 +43,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
         Employee employee = employeeRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        if (!employee.getUsername().equals(username)) {
-            throw new SecurityException("You do not have permission to edit this bid");
-        }
+        DataValidatorService.checkIfUsernamesEqual(username, employee.getUsername());
 
         if (bidEditRequest.getName() != null) {
             bid.setName(bidEditRequest.getName());
@@ -69,9 +68,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
         BidHistory history = bidHistoryRepository.findByBidIdAndVersion(bidId, targetVersion)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid history not found"));
 
-        if (!bid.getAuthorId().equals(employee.getId())) {
-            throw new SecurityException("You do not have permission to rollback this bid");
-        }
+        DataValidatorService.checkIfIdsEqual(employee.getId(), bid.getAuthorId());
 
         bid.setName(history.getName());
         bid.setDescription(history.getDescription());

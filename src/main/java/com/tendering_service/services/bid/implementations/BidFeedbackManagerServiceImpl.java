@@ -1,5 +1,7 @@
 package com.tendering_service.services.bid.implementations;
 
+import com.tendering_service.services.other.DataValidatorService;
+import com.tendering_service.services.bid.BidFeedbackManagerService;
 import com.tendering_service.entities.Bid;
 import com.tendering_service.entities.BidHistory;
 import com.tendering_service.entities.Employee;
@@ -7,7 +9,6 @@ import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.BidHistoryRepository;
 import com.tendering_service.repositories.BidRepository;
 import com.tendering_service.repositories.EmployeeRepository;
-import com.tendering_service.services.bid.BidFeedbackManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +35,7 @@ public class BidFeedbackManagerServiceImpl implements BidFeedbackManagerService 
         BidHistory history = bidHistoryRepository.findByBidIdAndVersion(bidId, bid.getVersion())
                 .orElseThrow(() -> new ResourceNotFoundException("Bid history not found"));
 
-        if (!bid.getAuthorId().equals(employee.getId())) {
-            throw new SecurityException("You do not have permission to edit this bid");
-        }
+        DataValidatorService.checkIfIdsEqual(employee.getId(), bid.getAuthorId());
 
         bid.setFeedback(feedback);
         bid.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

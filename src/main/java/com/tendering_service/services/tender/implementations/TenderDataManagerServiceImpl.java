@@ -8,6 +8,7 @@ import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.TenderHistoryRepository;
 import com.tendering_service.repositories.TenderRepository;
 import com.tendering_service.requests.TenderEditRequest;
+import com.tendering_service.services.other.DataValidatorService;
 import com.tendering_service.services.tender.TenderDataManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,7 @@ public class TenderDataManagerServiceImpl implements TenderDataManagerService {
         TenderHistory history = tenderHistoryRepository.findByTenderIdAndVersion(tenderId, targetVersion)
                 .orElseThrow(() -> new ResourceNotFoundException("TenderHistory not found"));
 
-        if (!tender.getCreatorUsername().equals(username)) {
-            throw new SecurityException("You do not have permission to rollback this tender");
-        }
+        DataValidatorService.checkIfUsernamesEqual(tender.getCreatorUsername(), username);
 
         tender.setName(history.getName());
         tender.setDescription(history.getDescription());
@@ -68,9 +67,7 @@ public class TenderDataManagerServiceImpl implements TenderDataManagerService {
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 
-        if (!tender.getCreatorUsername().equals(username)) {
-            throw new SecurityException("You do not have permission to edit this tender");
-        }
+        DataValidatorService.checkIfUsernamesEqual(tender.getCreatorUsername(), username);
 
         if (tenderEditRequest.getName() != null) {
             tender.setName(tenderEditRequest.getName());

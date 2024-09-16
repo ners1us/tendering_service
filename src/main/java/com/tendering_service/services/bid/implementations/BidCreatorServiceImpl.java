@@ -1,12 +1,12 @@
 package com.tendering_service.services.bid.implementations;
 
+import com.tendering_service.services.bid.BidCreatorService;
 import com.tendering_service.dto.BidDto;
 import com.tendering_service.entities.*;
 import com.tendering_service.enums.AuthorType;
 import com.tendering_service.enums.BidStatus;
 import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.*;
-import com.tendering_service.services.bid.BidCreatorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +25,15 @@ public class BidCreatorServiceImpl implements BidCreatorService {
 
     private final BidHistoryRepository bidHistoryRepository;
 
+    private final TenderRepository tenderRepository;
+
     public BidDto createBid(BidDto bidDto) {
         OrganizationResponsible organizationResponsible;
         Bid bid = BidDto.toEntity(bidDto);
+
+        if (tenderRepository.findById(bid.getTenderId()).isEmpty()) {
+            throw new ResourceNotFoundException("Tender Not Found");
+        }
 
         bid.setStatus(BidStatus.CREATED);
         bid.setCreatedAt(new Timestamp(System.currentTimeMillis()));

@@ -5,6 +5,7 @@ import com.tendering_service.entities.Tender;
 import com.tendering_service.enums.TenderStatus;
 import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.TenderRepository;
+import com.tendering_service.services.other.DataValidatorService;
 import com.tendering_service.services.tender.TenderStatusManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,7 @@ public class TenderStatusManagerServiceImpl implements TenderStatusManagerServic
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 
-        if (!tender.getCreatorUsername().equals(username)) {
-            throw new SecurityException("You do not have permission to update this tender's status");
-        }
+        DataValidatorService.checkIfUsernamesEqual(username, tender.getCreatorUsername());
 
         tender.setStatus(status);
         tender.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
@@ -37,11 +36,8 @@ public class TenderStatusManagerServiceImpl implements TenderStatusManagerServic
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 
-        if (!tender.getCreatorUsername().equals(username)) {
-            return "User does not have permission to view this tender status";
-        }
+        DataValidatorService.checkIfUsernamesEqual(username, tender.getCreatorUsername());
 
         return tender.getStatus().name();
     }
 }
-
