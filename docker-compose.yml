@@ -1,4 +1,19 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      tendering-db:
+        condition: service_healthy
+    environment:
+      POSTGRES_JDBC_URL: jdbc:postgresql://tendering-db:5432/tender_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+
   tendering-db:
     image: postgres:latest
     container_name: tendering_db
@@ -6,7 +21,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - tendering_data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=password
@@ -19,4 +34,4 @@ services:
       start_period: 15s
 
 volumes:
-  tendering_data:
+  data:
