@@ -69,3 +69,12 @@ docker compose down
 ```bash
 docker volume rm tendering_service_tendering_data
 ```
+
+## Данные для авторизации в БД
+
+- ### Для базы данных приложения (PostgreSQL, порт - 5432):
+    - username: admin
+    - password: password
+
+## Примечания
+- Спецификация API находится в файле ```openapi.yml```.
