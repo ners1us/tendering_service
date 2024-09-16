@@ -1,10 +1,7 @@
 package com.tendering_service.services.other;
 
-import org.springframework.stereotype.Service;
-
 import java.util.UUID;
 
-@Service
 public class DataValidatorService {
 
     public static void checkIfUsernamesEqual(String username1, String username2) {
