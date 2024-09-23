@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ners1us
       changes:
         - sql:
-            splitStatements: false
+            endDelimiter: ';'
             sql: |
               INSERT INTO organization (id, name, description, type, created_at, updated_at) VALUES
               ('550e8400-e29b-41d4-a716-446655440020', 'Organization 1', 'Description 1', 'LLC', '2024-09-14 14:09:16.941457', '2024-09-14 14:09:16.941457'),
