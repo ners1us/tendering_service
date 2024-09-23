@@ -28,7 +28,6 @@ public class BidCreatorServiceImpl implements BidCreatorService {
     private final TenderRepository tenderRepository;
 
     public BidDto createBid(BidDto bidDto) {
-        OrganizationResponsible organizationResponsible;
         Bid bid = BidDto.toEntity(bidDto);
 
         if (tenderRepository.findById(bid.getTenderId()).isEmpty()) {
@@ -42,17 +41,14 @@ public class BidCreatorServiceImpl implements BidCreatorService {
         if (bid.getAuthorType().equals(AuthorType.User)) {
             Employee employee = employeeRepository.findById(bid.getAuthorId()).get();
 
-            organizationResponsible = organizationResponsibleRepository.findByUser(employee)
+            OrganizationResponsible organizationResponsible = organizationResponsibleRepository.findByUser(employee)
                     .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
             bid.setOrganizationId(organizationResponsible.getOrganization().getId());
         } else if (bid.getAuthorType().equals(AuthorType.Organization)) {
             Organization organization = organizationRepository.findById(bid.getAuthorId()).get();
 
-            organizationResponsible = organizationResponsibleRepository.findByOrganization(organization)
-                    .orElseThrow(() -> new ResourceNotFoundException("Organization not found"));
-
-            bid.setOrganizationId(organizationResponsible.getId());
+            bid.setOrganizationId(organization.getId());
         }
 
         Bid createdBid = bidRepository.save(bid);
