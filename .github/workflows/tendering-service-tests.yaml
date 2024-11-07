@@ -1,0 +1,29 @@
+name: Build and Test Tendering Service
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'src/**'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - 'src/**'
+
+jobs:
+  test-brt:
+    runs-on: ubuntu-latest
+    name: Run Tendering Service Tests
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run tests
+        run: mvn test
