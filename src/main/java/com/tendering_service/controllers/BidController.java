@@ -182,5 +182,4 @@ public class BidController {
 
         return ResponseEntity.ok().build();
     }
-
 }
