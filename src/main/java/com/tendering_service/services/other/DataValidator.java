@@ -2,7 +2,7 @@ package com.tendering_service.services.other;
 
 import java.util.UUID;
 
-public class DataValidatorService {
+public class DataValidator {
 
     public static void checkIfUsernamesEqual(String username1, String username2) {
         if (!username1.equals(username2)) {

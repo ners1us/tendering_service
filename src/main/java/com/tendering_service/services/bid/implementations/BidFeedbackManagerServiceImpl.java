@@ -1,6 +1,6 @@
 package com.tendering_service.services.bid.implementations;
 
-import com.tendering_service.services.other.DataValidatorService;
+import com.tendering_service.services.other.DataValidator;
 import com.tendering_service.services.bid.BidFeedbackManagerService;
 import com.tendering_service.entities.Bid;
 import com.tendering_service.entities.BidHistory;
@@ -35,7 +35,7 @@ public class BidFeedbackManagerServiceImpl implements BidFeedbackManagerService 
         BidHistory history = bidHistoryRepository.findByBidIdAndVersion(bidId, bid.getVersion())
                 .orElseThrow(() -> new ResourceNotFoundException("Bid history not found"));
 
-        DataValidatorService.checkIfIdsEqual(employee.getId(), bid.getAuthorId());
+        DataValidator.checkIfIdsEqual(employee.getId(), bid.getAuthorId());
 
         bid.setFeedback(feedback);
         bid.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

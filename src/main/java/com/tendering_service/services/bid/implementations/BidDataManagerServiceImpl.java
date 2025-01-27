@@ -1,6 +1,6 @@
 package com.tendering_service.services.bid.implementations;
 
-import com.tendering_service.services.other.DataValidatorService;
+import com.tendering_service.services.other.DataValidator;
 import com.tendering_service.services.bid.BidDataManagerService;
 import com.tendering_service.dto.BidDto;
 import com.tendering_service.entities.Bid;
@@ -43,7 +43,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
         Employee employee = employeeRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        DataValidatorService.checkIfUsernamesEqual(username, employee.getUsername());
+        DataValidator.checkIfUsernamesEqual(username, employee.getUsername());
 
         if (bidEditRequest.getName() != null) {
             bid.setName(bidEditRequest.getName());
@@ -68,7 +68,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
         BidHistory history = bidHistoryRepository.findByBidIdAndVersion(bidId, targetVersion)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid history not found"));
 
-        DataValidatorService.checkIfIdsEqual(employee.getId(), bid.getAuthorId());
+        DataValidator.checkIfIdsEqual(employee.getId(), bid.getAuthorId());
 
         bid.setName(history.getName());
         bid.setDescription(history.getDescription());
