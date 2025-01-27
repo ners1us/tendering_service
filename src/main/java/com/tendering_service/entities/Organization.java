@@ -16,29 +16,41 @@ import java.util.UUID;
 @Table(name = "organization")
 public class Organization {
 
-    /** Уникальный идентификатор организации */
+    /**
+     * Уникальный идентификатор организации
+     */
     @Id
     @GeneratedValue
     private UUID id;
 
-    /** Название организации */
+    /**
+     * Название организации
+     */
     @Column(nullable = false)
     private String name;
 
-    /** Описание организации */
+    /**
+     * Описание организации
+     */
     @Column(nullable = false)
     private String description;
 
-    /** Тип организации */
+    /**
+     * Тип организации
+     */
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private OrganizationType type;
 
-    /** Время создания записи об организации */
+    /**
+     * Время создания записи об организации
+     */
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    /** Время последнего обновления записи об организации */
+    /**
+     * Время последнего обновления записи об организации
+     */
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 }

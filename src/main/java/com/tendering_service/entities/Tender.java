@@ -17,44 +17,64 @@ import java.util.UUID;
 @Data
 public class Tender {
 
-    /** Уникальный идентификатор тендера */
+    /**
+     * Уникальный идентификатор тендера
+     */
     @Id
     @GeneratedValue
     private UUID id;
 
-    /** Название тендера */
+    /**
+     * Название тендера
+     */
     @Column(nullable = false)
     private String name;
 
-    /** Описание тендера */
+    /**
+     * Описание тендера
+     */
     @Column(nullable = false)
     private String description;
 
-    /** Идентификатор организации, проводящей тендер */
+    /**
+     * Идентификатор организации, проводящей тендер
+     */
     @Column(name = "organization_id", nullable = false)
     private UUID organizationId;
 
-    /** Тип услуги, связанной с тендером */
+    /**
+     * Тип услуги, связанной с тендером
+     */
     @Enumerated(EnumType.STRING)
     private ServiceType serviceType;
 
-    /** Статус тендера */
+    /**
+     * Статус тендера
+     */
     @Enumerated(EnumType.STRING)
     private TenderStatus status;
 
-    /** Время создания тендера */
+    /**
+     * Время создания тендера
+     */
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    /** Время последнего обновления тендера */
+    /**
+     * Время последнего обновления тендера
+     */
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    /** Версия тендера */
+    /**
+     * Версия тендера
+     */
     @Column(nullable = false)
     private Integer version;
 
-    /** Имя пользователя, создавшего тендер */
+    /**
+     * Имя пользователя, создавшего тендер
+     */
     @Column(nullable = false)
     private String creatorUsername;
 

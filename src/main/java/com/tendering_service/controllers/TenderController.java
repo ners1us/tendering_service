@@ -60,7 +60,7 @@ public class TenderController {
      * Откатывает тендер до указанной версии.
      *
      * @param tenderId идентификатор тендера
-     * @param version номер версии для отката
+     * @param version  номер версии для отката
      * @param username имя пользователя
      * @return откатанный тендер в виде объекта {@link TenderDto}
      */
@@ -92,14 +92,14 @@ public class TenderController {
      * Обновляет статус тендера.
      *
      * @param tenderId идентификатор тендера
-     * @param status новый статус тендера
+     * @param status   новый статус тендера
      * @param username имя пользователя
      * @return обновленный тендер в виде {@link TenderDto}
      */
     @PutMapping("/{tenderId}/status")
     public ResponseEntity<TenderDto> updateTenderStatus(@PathVariable String tenderId,
-                                                  @RequestParam String status,
-                                                  @RequestParam String username) {
+                                                        @RequestParam String status,
+                                                        @RequestParam String username) {
         TenderDto updatedTender = tenderFacadeService.updateTenderStatus(UUID.fromString(tenderId), TenderStatus.valueOf(status.toUpperCase()), username);
 
         tenderFacadeService.incrementTenderVersion(UUID.fromString(tenderId));
@@ -123,8 +123,8 @@ public class TenderController {
     /**
      * Редактирует указанный тендер.
      *
-     * @param tenderId идентификатор тендера
-     * @param username имя пользователя
+     * @param tenderId          идентификатор тендера
+     * @param username          имя пользователя
      * @param tenderEditRequest запрос, содержащий данные для редактирования тендера
      * @return обновленный тендер в виде {@link TenderDto}
      */

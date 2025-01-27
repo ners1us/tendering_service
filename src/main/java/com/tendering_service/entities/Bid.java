@@ -19,56 +19,82 @@ import java.util.UUID;
 @Data
 public class Bid {
 
-    /** Уникальный идентификатор заявки */
+    /**
+     * Уникальный идентификатор заявки
+     */
     @Id
     @GeneratedValue
     private UUID id;
 
-    /** Название заявки */
+    /**
+     * Название заявки
+     */
     @Column(nullable = false)
     private String name;
 
-    /** Описание заявки */
+    /**
+     * Описание заявки
+     */
     @Column(nullable = false)
     private String description;
 
-    /** Идентификатор тендера, к которому относится заявка */
+    /**
+     * Идентификатор тендера, к которому относится заявка
+     */
     @Column(name = "tender_id", nullable = false)
     private UUID tenderId;
 
-    /** Идентификатор организации, сделавшей заявку */
+    /**
+     * Идентификатор организации, сделавшей заявку
+     */
     @Column(name = "organization_id", nullable = false)
     private UUID organizationId;
 
-    /** Тип автора заявки (пользователь или организация) */
+    /**
+     * Тип автора заявки (пользователь или организация)
+     */
     @Enumerated(EnumType.STRING)
     private AuthorType authorType;
 
-    /** Статус заявки */
+    /**
+     * Статус заявки
+     */
     @Enumerated(EnumType.STRING)
     private BidStatus status;
 
-    /** Версия заявки */
+    /**
+     * Версия заявки
+     */
     @Column(nullable = false)
     private Integer version;
 
-    /** Время создания заявки */
+    /**
+     * Время создания заявки
+     */
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    /** Время обновления заявки */
+    /**
+     * Время обновления заявки
+     */
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    /** Идентификатор автора заявки */
+    /**
+     * Идентификатор автора заявки
+     */
     @Column(nullable = false)
     private UUID authorId;
 
-    /** Решение по предложению */
+    /**
+     * Решение по предложению
+     */
     @Column
     private DecisionStatus decision;
 
-    /** Отзыв по предложению */
+    /**
+     * Отзыв по предложению
+     */
     @Column
     private String feedback;
 

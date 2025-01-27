@@ -38,9 +38,9 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
     /**
      * Откатывает тендер к предыдущей версии.
      *
-     * @param tenderId идентификатор тендера
+     * @param tenderId      идентификатор тендера
      * @param targetVersion версия для отката
-     * @param username имя пользователя, выполняющего откат
+     * @param username      имя пользователя, выполняющего откат
      * @return DTO откатанного тендера
      */
     public TenderDto rollbackTender(UUID tenderId, Integer targetVersion, String username) {
@@ -51,7 +51,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * Обновляет статус тендера.
      *
      * @param tenderId идентификатор тендера
-     * @param status новый статус тендера
+     * @param status   новый статус тендера
      * @param username имя пользователя, выполняющего обновление
      * @return обновленный тендер
      */
@@ -101,8 +101,8 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
     /**
      * Редактирует тендер.
      *
-     * @param tenderId идентификатор тендера
-     * @param username имя пользователя, выполняющего редактирование
+     * @param tenderId          идентификатор тендера
+     * @param username          имя пользователя, выполняющего редактирование
      * @param tenderEditRequest запрос с изменениями для тендера
      * @return DTO отредактированного тендера
      */

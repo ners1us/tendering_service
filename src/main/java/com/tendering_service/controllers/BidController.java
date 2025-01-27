@@ -63,8 +63,8 @@ public class BidController {
     /**
      * Откатывает заявку до указанной версии.
      *
-     * @param bidId идентификатор заявки
-     * @param version номер версии для отката
+     * @param bidId    идентификатор заявки
+     * @param version  номер версии для отката
      * @param username имя пользователя
      * @return откатанная заявка в виде {@link BidDto}
      */
@@ -80,13 +80,13 @@ public class BidController {
     /**
      * Возвращает статус заявки.
      *
-     * @param bidId идентификатор заявки
+     * @param bidId    идентификатор заявки
      * @param username имя пользователя
      * @return строка, представляющая статус заявки
      */
     @GetMapping("/{bidId}/status")
     public ResponseEntity<String> getBidStatus(@PathVariable String bidId,
-                                                  @RequestParam String username) {
+                                               @RequestParam String username) {
         String status = bidFacadeService.getBidStatus(UUID.fromString(bidId), username);
 
         return ResponseEntity.ok(status);
@@ -95,15 +95,15 @@ public class BidController {
     /**
      * Обновляет статус заявки.
      *
-     * @param bidId идентификатор заявки
-     * @param status новый статус заявки
+     * @param bidId    идентификатор заявки
+     * @param status   новый статус заявки
      * @param username имя пользователя
      * @return обновленная заявка в виде {@link BidDto}
      */
     @PutMapping("/{bidId}/status")
     public ResponseEntity<BidDto> updateBidStatus(@PathVariable String bidId,
-                                                     @RequestParam String status,
-                                                     @RequestParam String username) {
+                                                  @RequestParam String status,
+                                                  @RequestParam String username) {
         BidDto updatedBid = bidFacadeService.updateBidStatus(UUID.fromString(bidId), BidStatus.valueOf(status.toUpperCase()), username);
 
         bidFacadeService.incrementBidVersion(UUID.fromString(bidId));
@@ -127,8 +127,8 @@ public class BidController {
     /**
      * Обновляет заявку по указанному идентификатору.
      *
-     * @param bidId идентификатор заявки, которую необходимо обновить
-     * @param username имя пользователя, вносящего изменения в заявку
+     * @param bidId          идентификатор заявки, которую необходимо обновить
+     * @param username       имя пользователя, вносящего изменения в заявку
      * @param bidEditRequest объект, содержащий новые данные для заявки
      * @return обновленная заявка в виде {@link BidDto}
      */
@@ -148,7 +148,7 @@ public class BidController {
     /**
      * Отправляет решение по заявке.
      *
-     * @param bidId идентификатор заявки
+     * @param bidId    идентификатор заявки
      * @param decision решение, принятое по заявке, представленное в виде {@link DecisionStatus}
      * @param username имя пользователя, отправляющего решение
      * @return пустой ответ с кодом 200 OK при успешной отправке решения
@@ -167,9 +167,9 @@ public class BidController {
     /**
      * Отправляет отзыв на заявку.
      *
-     * @param bidId идентификатор заявки
+     * @param bidId       идентификатор заявки
      * @param bidFeedback текст отзыва на заявку
-     * @param username имя пользователя, отправляющего отзыв
+     * @param username    имя пользователя, отправляющего отзыв
      * @return пустой ответ с кодом 200 OK при успешной отправке отзыва
      */
     @PutMapping("/{bidId}/feedback")

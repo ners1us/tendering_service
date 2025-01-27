@@ -2,6 +2,7 @@ package com.tendering_service.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.util.UUID;
 
 /**
@@ -13,17 +14,23 @@ import java.util.UUID;
 @Table(name = "organization_responsible")
 public class OrganizationResponsible {
 
-    /** Уникальный идентификатор записи */
+    /**
+     * Уникальный идентификатор записи
+     */
     @Id
     @GeneratedValue
     private UUID id;
 
-    /** Связанная организация */
+    /**
+     * Связанная организация
+     */
     @ManyToOne
     @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
-    /** Ответственный сотрудник */
+    /**
+     * Ответственный сотрудник
+     */
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Employee user;

@@ -18,57 +18,83 @@ import java.util.UUID;
 @Data
 public class BidHistory {
 
-    /** Уникальный идентификатор записи истории */
+    /**
+     * Уникальный идентификатор записи истории
+     */
     @Id
     @GeneratedValue
     private UUID id;
 
-    /** Связанная заявка */
+    /**
+     * Связанная заявка
+     */
     @ManyToOne
     @JoinColumn(name = "bid_id", nullable = false)
     private Bid bid;
 
-    /** Название заявки на момент изменения */
+    /**
+     * Название заявки на момент изменения
+     */
     @Column(nullable = false)
     private String name;
 
-    /** Описание заявки на момент изменения */
+    /**
+     * Описание заявки на момент изменения
+     */
     @Column(nullable = false)
     private String description;
 
-    /** Идентификатор организации на момент изменения */
+    /**
+     * Идентификатор организации на момент изменения
+     */
     @Column(name = "organization_id", nullable = false)
     private UUID organizationId;
 
-    /** Тип автора заявки на момент изменения */
+    /**
+     * Тип автора заявки на момент изменения
+     */
     @Enumerated(EnumType.STRING)
     private AuthorType authorType;
 
-    /** Статус заявки на момент изменения */
+    /**
+     * Статус заявки на момент изменения
+     */
     @Enumerated(EnumType.STRING)
     private BidStatus status;
 
-    /** Версия заявки на момент изменения */
+    /**
+     * Версия заявки на момент изменения
+     */
     @Column(nullable = false)
     private Integer version;
 
-    /** Время создания записи истории */
+    /**
+     * Время создания записи истории
+     */
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    /** Время последнего обновления записи */
+    /**
+     * Время последнего обновления записи
+     */
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    /** Идентификатор автора заявки на момент изменения */
+    /**
+     * Идентификатор автора заявки на момент изменения
+     */
     @Column(nullable = false)
     private UUID authorId;
 
-    /** Решение по предложению */
+    /**
+     * Решение по предложению
+     */
     @Column
     private DecisionStatus decision;
 
-    /** Отзыв по предложению */
+    /**
+     * Отзыв по предложению
+     */
     @Column
     private String feedback;
 

@@ -43,8 +43,8 @@ public class BidFacadeServiceImpl implements BidFacadeService {
     /**
      * Обновляет статус заявки.
      *
-     * @param bidId идентификатор заявки
-     * @param status новый статус заявки
+     * @param bidId    идентификатор заявки
+     * @param status   новый статус заявки
      * @param username имя пользователя, выполняющего обновление
      * @return обновленная заявка
      */
@@ -55,7 +55,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
     /**
      * Получает статус заявки.
      *
-     * @param bidId идентификатор заявки
+     * @param bidId    идентификатор заявки
      * @param username имя пользователя
      * @return строковое представление статуса заявки
      */
@@ -77,9 +77,9 @@ public class BidFacadeServiceImpl implements BidFacadeService {
     /**
      * Откат заявки к предыдущей версии.
      *
-     * @param bidId идентификатор заявки
+     * @param bidId         идентификатор заявки
      * @param targetVersion версия для отката
-     * @param username имя пользователя
+     * @param username      имя пользователя
      * @return откатанная заявка
      */
     public BidDto rollbackBid(UUID bidId, Integer targetVersion, String username) {
@@ -99,8 +99,8 @@ public class BidFacadeServiceImpl implements BidFacadeService {
     /**
      * Редактирует заявку.
      *
-     * @param bidId идентификатор заявки
-     * @param username имя пользователя, выполняющего редактирование
+     * @param bidId          идентификатор заявки
+     * @param username       имя пользователя, выполняющего редактирование
      * @param bidEditRequest запрос с изменениями для заявки
      * @return отредактированная заявка
      */
@@ -120,8 +120,8 @@ public class BidFacadeServiceImpl implements BidFacadeService {
     /**
      * Отправляет решение по заявке.
      *
-     * @param bidId идентификатор заявки
-     * @param status решение по заявке, представленное в виде {@link DecisionStatus}
+     * @param bidId    идентификатор заявки
+     * @param status   решение по заявке, представленное в виде {@link DecisionStatus}
      * @param username имя пользователя, отправляющего решение
      */
     public void submitDecision(UUID bidId, DecisionStatus status, String username) {
@@ -131,7 +131,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
     /**
      * Отправляет отзыв на заявку.
      *
-     * @param bidId идентификатор заявки
+     * @param bidId    идентификатор заявки
      * @param feedback текст отзыва на заявку
      * @param username имя пользователя, отправляющего отзыв
      */

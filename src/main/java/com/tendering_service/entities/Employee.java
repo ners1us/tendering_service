@@ -15,28 +15,40 @@ import java.util.UUID;
 @Table(name = "employee")
 public class Employee {
 
-    /** Уникальный идентификатор сотрудника */
+    /**
+     * Уникальный идентификатор сотрудника
+     */
     @Id
     @GeneratedValue
     private UUID id;
 
-    /** Имя пользователя */
+    /**
+     * Имя пользователя
+     */
     @Column(unique = true, nullable = false)
     private String username;
 
-    /** Имя сотрудника */
+    /**
+     * Имя сотрудника
+     */
     @Column(name = "first_name")
     private String firstName;
 
-    /** Фамилия сотрудника */
+    /**
+     * Фамилия сотрудника
+     */
     @Column(name = "last_name")
     private String lastName;
 
-    /** Время создания записи о сотруднике */
+    /**
+     * Время создания записи о сотруднике
+     */
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    /** Время последнего обновления записи о сотруднике */
+    /**
+     * Время последнего обновления записи о сотруднике
+     */
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 }
