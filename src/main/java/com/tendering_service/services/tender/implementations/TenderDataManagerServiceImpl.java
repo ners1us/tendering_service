@@ -8,7 +8,7 @@ import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.TenderHistoryRepository;
 import com.tendering_service.repositories.TenderRepository;
 import com.tendering_service.requests.TenderEditRequest;
-import com.tendering_service.services.other.DataValidator;
+import com.tendering_service.utils.DataValidator;
 import com.tendering_service.services.tender.TenderDataManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

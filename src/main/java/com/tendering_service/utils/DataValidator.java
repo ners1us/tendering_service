@@ -1,4 +1,4 @@
-package com.tendering_service.services.other;
+package com.tendering_service.utils;
 
 import java.util.UUID;
 

@@ -5,7 +5,7 @@ import com.tendering_service.entities.Tender;
 import com.tendering_service.enums.TenderStatus;
 import com.tendering_service.exceptions.ResourceNotFoundException;
 import com.tendering_service.repositories.TenderRepository;
-import com.tendering_service.services.other.DataValidator;
+import com.tendering_service.utils.DataValidator;
 import com.tendering_service.services.tender.TenderStatusManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.tendering_service.services.bid.implementations;
 
-import com.tendering_service.services.other.DataValidator;
+import com.tendering_service.utils.DataValidator;
 import com.tendering_service.services.bid.BidDataManagerService;
 import com.tendering_service.dto.BidDto;
 import com.tendering_service.entities.Bid;
