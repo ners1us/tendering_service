@@ -31,7 +31,7 @@ public class BidCreatorServiceImpl implements BidCreatorService {
         Bid bid = BidDto.toEntity(bidDto);
 
         if (tenderRepository.findById(bid.getTenderId()).isEmpty()) {
-            throw new ResourceNotFoundException("Tender Not Found");
+            throw new ResourceNotFoundException("Tender not found");
         }
 
         bid.setStatus(BidStatus.CREATED);
