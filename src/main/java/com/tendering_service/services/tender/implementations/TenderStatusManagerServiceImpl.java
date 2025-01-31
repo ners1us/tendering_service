@@ -19,7 +19,7 @@ public class TenderStatusManagerServiceImpl implements TenderStatusManagerServic
 
     private final TenderRepository tenderRepository;
 
-    public TenderDto updateTenderStatus(UUID tenderId, TenderStatus status, String username) {
+    public TenderDto updateStatus(UUID tenderId, TenderStatus status, String username) {
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 
@@ -32,7 +32,7 @@ public class TenderStatusManagerServiceImpl implements TenderStatusManagerServic
         return TenderDto.fromEntity(updatedTender);
     }
 
-    public String getTenderStatus(UUID tenderId, String username) {
+    public String getStatus(UUID tenderId, String username) {
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 

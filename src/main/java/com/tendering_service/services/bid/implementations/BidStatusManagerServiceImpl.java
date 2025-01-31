@@ -20,7 +20,7 @@ public class BidStatusManagerServiceImpl implements BidStatusManagerService {
 
     private final EmployeeRepository employeeRepository;
 
-    public BidDto updateBidStatus(UUID bidId, BidStatus status, String username) {
+    public BidDto updateStatus(UUID bidId, BidStatus status, String username) {
         Bid bid = bidRepository.findById(bidId)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid not found"));
 
@@ -37,7 +37,7 @@ public class BidStatusManagerServiceImpl implements BidStatusManagerService {
         return BidDto.fromEntity(updatedBid);
     }
 
-    public String getBidStatus(UUID bidId, String username) {
+    public String getStatus(UUID bidId, String username) {
         Bid bid = bidRepository.findById(bidId)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid not found"));
 

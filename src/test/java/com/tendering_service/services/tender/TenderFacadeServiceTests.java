@@ -57,68 +57,68 @@ class TenderFacadeServiceTests {
 
     @Test
     void createTenderSuccessTest() {
-        when(tenderCreatorServiceImpl.createTender(any(TenderDto.class))).thenReturn(tenderDto);
+        when(tenderCreatorServiceImpl.create(any(TenderDto.class))).thenReturn(tenderDto);
 
         TenderDto createdTender = tenderFacadeService.createTender(tenderDto);
 
         assertNotNull(createdTender);
         assertEquals(tenderDto.getName(), createdTender.getName());
-        verify(tenderCreatorServiceImpl, times(1)).createTender(any(TenderDto.class));
+        verify(tenderCreatorServiceImpl, times(1)).create(any(TenderDto.class));
     }
 
     @Test
     void rollbackTenderSuccessTest() {
-        when(tenderDataManagerService.rollbackTender(any(UUID.class), anyInt(), anyString())).thenReturn(tenderDto);
+        when(tenderDataManagerService.rollback(any(UUID.class), anyInt(), anyString())).thenReturn(tenderDto);
 
         TenderDto rolledBackTender = tenderFacadeService.rollbackTender(UUID.randomUUID(), 1, "username");
 
         assertNotNull(rolledBackTender);
-        verify(tenderDataManagerService, times(1)).rollbackTender(any(UUID.class), anyInt(), anyString());
+        verify(tenderDataManagerService, times(1)).rollback(any(UUID.class), anyInt(), anyString());
     }
 
     @Test
     void getTenderStatusSuccessTest() {
-        when(tenderStatusManagerService.getTenderStatus(any(UUID.class), anyString())).thenReturn(TenderStatus.PUBLISHED.name());
+        when(tenderStatusManagerService.getStatus(any(UUID.class), anyString())).thenReturn(TenderStatus.PUBLISHED.name());
 
         String status = tenderFacadeService.getTenderStatus(UUID.randomUUID(), "username");
 
         assertEquals(TenderStatus.PUBLISHED.name(), status);
-        verify(tenderStatusManagerService, times(1)).getTenderStatus(any(UUID.class), anyString());
+        verify(tenderStatusManagerService, times(1)).getStatus(any(UUID.class), anyString());
     }
 
     @Test
     void incrementTenderVersionTest() {
-        doNothing().when(tenderDataManagerService).incrementTenderVersion(any(UUID.class));
+        doNothing().when(tenderDataManagerService).incrementVersion(any(UUID.class));
 
         tenderFacadeService.incrementTenderVersion(UUID.randomUUID());
 
-        verify(tenderDataManagerService, times(1)).incrementTenderVersion(any(UUID.class));
+        verify(tenderDataManagerService, times(1)).incrementVersion(any(UUID.class));
     }
 
     @Test
     void getTendersByUsernameSuccessTest() {
         List<TenderDto> tenders = new ArrayList<>();
         tenders.add(tenderDto);
-        when(tenderDatabaseService.getTendersByUsername(anyString())).thenReturn(tenders);
+        when(tenderDatabaseService.getItemsByUsername(anyString())).thenReturn(tenders);
 
         List<TenderDto> result = tenderFacadeService.getTendersByUsername("username");
 
         assertFalse(result.isEmpty());
         assertEquals(tenderDto.getName(), result.get(0).getName());
-        verify(tenderDatabaseService, times(1)).getTendersByUsername(anyString());
+        verify(tenderDatabaseService, times(1)).getItemsByUsername(anyString());
     }
 
     @Test
     void getAllTendersSuccessTest() {
         List<TenderDto> tenders = new ArrayList<>();
         tenders.add(tenderDto);
-        when(tenderDatabaseService.getAllTenders()).thenReturn(tenders);
+        when(tenderDatabaseService.getAllItems()).thenReturn(tenders);
 
         List<TenderDto> result = tenderFacadeService.getAllTenders();
 
         assertFalse(result.isEmpty());
         assertEquals(tenderDto.getName(), result.get(0).getName());
-        verify(tenderDatabaseService, times(1)).getAllTenders();
+        verify(tenderDatabaseService, times(1)).getAllItems();
     }
 
     @Test
@@ -130,7 +130,7 @@ class TenderFacadeServiceTests {
         editedTenderDto.setServiceType(ServiceType.Construction);
         editedTenderDto.setStatus(TenderStatus.CREATED);
 
-        when(tenderDataManagerService.editTender(any(UUID.class), anyString(), any(TenderEditRequest.class)))
+        when(tenderDataManagerService.edit(any(UUID.class), anyString(), any(TenderEditRequest.class)))
                 .thenReturn(editedTenderDto);
 
         TenderEditRequest tenderEditRequest = new TenderEditRequest();
@@ -144,12 +144,12 @@ class TenderFacadeServiceTests {
         assertEquals("Updated Name", editedTender.getName());
         assertEquals("Updated Description", editedTender.getDescription());
         assertEquals(ServiceType.Construction, editedTender.getServiceType());
-        verify(tenderDataManagerService, times(1)).editTender(any(UUID.class), anyString(), any(TenderEditRequest.class));
+        verify(tenderDataManagerService, times(1)).edit(any(UUID.class), anyString(), any(TenderEditRequest.class));
     }
 
     @Test
     void editTenderFailureTest() {
-        when(tenderDataManagerService.editTender(any(UUID.class), anyString(), any(TenderEditRequest.class)))
+        when(tenderDataManagerService.edit(any(UUID.class), anyString(), any(TenderEditRequest.class)))
                 .thenThrow(new RuntimeException("Failed to edit tender"));
 
         TenderEditRequest tenderEditRequest = new TenderEditRequest();
@@ -158,6 +158,6 @@ class TenderFacadeServiceTests {
         tenderEditRequest.setServiceType("Consulting");
 
         assertThrows(RuntimeException.class, () -> tenderFacadeService.editTender(UUID.randomUUID(), "username", tenderEditRequest));
-        verify(tenderDataManagerService, times(1)).editTender(any(UUID.class), anyString(), any(TenderEditRequest.class));
+        verify(tenderDataManagerService, times(1)).edit(any(UUID.class), anyString(), any(TenderEditRequest.class));
     }
 }

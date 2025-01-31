@@ -19,7 +19,7 @@ public class TenderDatabaseServiceImpl implements TenderDatabaseService {
 
     private final EmployeeRepository employeeRepository;
 
-    public List<TenderDto> getTendersByUsername(String username) {
+    public List<TenderDto> getItemsByUsername(String username) {
         if (employeeRepository.findByUsername(username).isEmpty()) {
             throw new ResourceNotFoundException("User not found");
         }
@@ -31,7 +31,7 @@ public class TenderDatabaseServiceImpl implements TenderDatabaseService {
                 .collect(Collectors.toList());
     }
 
-    public List<TenderDto> getAllTenders() {
+    public List<TenderDto> getAllItems() {
         return tenderRepository.findAll().stream()
                 .map(TenderDto::fromEntity)
                 .collect(Collectors.toList());

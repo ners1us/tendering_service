@@ -32,7 +32,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return DTO созданного тендера
      */
     public TenderDto createTender(TenderDto tenderDto) {
-        return tenderCreatorServiceImpl.createTender(tenderDto);
+        return tenderCreatorServiceImpl.create(tenderDto);
     }
 
     /**
@@ -44,7 +44,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return DTO откатанного тендера
      */
     public TenderDto rollbackTender(UUID tenderId, Integer targetVersion, String username) {
-        return tenderDataManagerService.rollbackTender(tenderId, targetVersion, username);
+        return tenderDataManagerService.rollback(tenderId, targetVersion, username);
     }
 
     /**
@@ -56,7 +56,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return обновленный тендер
      */
     public TenderDto updateTenderStatus(UUID tenderId, TenderStatus status, String username) {
-        return tenderStatusManagerService.updateTenderStatus(tenderId, status, username);
+        return tenderStatusManagerService.updateStatus(tenderId, status, username);
     }
 
     /**
@@ -67,7 +67,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return строковое представление статуса тендера
      */
     public String getTenderStatus(UUID tenderId, String username) {
-        return tenderStatusManagerService.getTenderStatus(tenderId, username);
+        return tenderStatusManagerService.getStatus(tenderId, username);
     }
 
     /**
@@ -76,7 +76,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @param tenderId идентификатор тендера
      */
     public void incrementTenderVersion(UUID tenderId) {
-        tenderDataManagerService.incrementTenderVersion(tenderId);
+        tenderDataManagerService.incrementVersion(tenderId);
     }
 
     /**
@@ -86,7 +86,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return список тендеров, созданных данным пользователем
      */
     public List<TenderDto> getTendersByUsername(String username) {
-        return tenderDatabaseService.getTendersByUsername(username);
+        return tenderDatabaseService.getItemsByUsername(username);
     }
 
     /**
@@ -95,7 +95,7 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return список всех тендеров
      */
     public List<TenderDto> getAllTenders() {
-        return tenderDatabaseService.getAllTenders();
+        return tenderDatabaseService.getAllItems();
     }
 
     /**
@@ -107,6 +107,6 @@ public class TenderFacadeServiceImpl implements TenderFacadeService {
      * @return DTO отредактированного тендера
      */
     public TenderDto editTender(UUID tenderId, String username, TenderEditRequest tenderEditRequest) {
-        return tenderDataManagerService.editTender(tenderId, username, tenderEditRequest);
+        return tenderDataManagerService.edit(tenderId, username, tenderEditRequest);
     }
 }

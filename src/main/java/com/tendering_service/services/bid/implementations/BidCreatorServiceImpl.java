@@ -27,7 +27,7 @@ public class BidCreatorServiceImpl implements BidCreatorService {
 
     private final TenderRepository tenderRepository;
 
-    public BidDto createBid(BidDto bidDto) {
+    public BidDto create(BidDto bidDto) {
         Bid bid = BidDto.toEntity(bidDto);
 
         if (tenderRepository.findById(bid.getTenderId()).isEmpty()) {

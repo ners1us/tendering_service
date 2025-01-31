@@ -1,11 +1,7 @@
 package com.tendering_service.services.tender;
 
 import com.tendering_service.dto.TenderDto;
+import com.tendering_service.services.EntityDatabaseService;
 
-import java.util.List;
-
-public interface TenderDatabaseService {
-    List<TenderDto> getTendersByUsername(String username);
-
-    List<TenderDto> getAllTenders();
+public interface TenderDatabaseService extends EntityDatabaseService<TenderDto> {
 }

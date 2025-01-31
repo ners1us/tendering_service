@@ -26,7 +26,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
 
     private final EmployeeRepository employeeRepository;
 
-    public void incrementBidVersion(UUID bidId) {
+    public void incrementVersion(UUID bidId) {
         Bid bid = bidRepository.findById(bidId)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid not found"));
 
@@ -37,7 +37,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
         saveBidHistory(bid);
     }
 
-    public BidDto editBid(UUID bidId, String username, BidEditRequest bidEditRequest) {
+    public BidDto edit(UUID bidId, String username, BidEditRequest bidEditRequest) {
         Bid bid = bidRepository.findById(bidId)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid not found"));
         Employee employee = employeeRepository.findByUsername(username)
@@ -58,7 +58,7 @@ public class BidDataManagerServiceImpl implements BidDataManagerService {
         return BidDto.fromEntity(updatedBid);
     }
 
-    public BidDto rollbackBid(UUID bidId, Integer targetVersion, String username) {
+    public BidDto rollback(UUID bidId, Integer targetVersion, String username) {
         Bid bid = bidRepository.findById(bidId)
                 .orElseThrow(() -> new ResourceNotFoundException("Bid not found"));
 

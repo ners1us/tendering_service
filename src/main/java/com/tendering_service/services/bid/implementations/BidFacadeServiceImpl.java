@@ -37,7 +37,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @return DTO созданной заявки
      */
     public BidDto createBid(BidDto bidDto) {
-        return bidCreatorService.createBid(bidDto);
+        return bidCreatorService.create(bidDto);
     }
 
     /**
@@ -49,7 +49,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @return обновленная заявка
      */
     public BidDto updateBidStatus(UUID bidId, BidStatus status, String username) {
-        return bidStatusManagerService.updateBidStatus(bidId, status, username);
+        return bidStatusManagerService.updateStatus(bidId, status, username);
     }
 
     /**
@@ -60,7 +60,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @return строковое представление статуса заявки
      */
     public String getBidStatus(UUID bidId, String username) {
-        return bidStatusManagerService.getBidStatus(bidId, username);
+        return bidStatusManagerService.getStatus(bidId, username);
     }
 
     /**
@@ -83,7 +83,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @return откатанная заявка
      */
     public BidDto rollbackBid(UUID bidId, Integer targetVersion, String username) {
-        return bidDataManagerService.rollbackBid(bidId, targetVersion, username);
+        return bidDataManagerService.rollback(bidId, targetVersion, username);
     }
 
     /**
@@ -93,7 +93,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @return список заявок
      */
     public List<BidDto> getBidsByUsername(String username) {
-        return bidDatabaseService.getBidsByUsername(username);
+        return bidDatabaseService.getItemsByUsername(username);
     }
 
     /**
@@ -105,7 +105,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @return отредактированная заявка
      */
     public BidDto editBid(UUID bidId, String username, BidEditRequest bidEditRequest) {
-        return bidDataManagerService.editBid(bidId, username, bidEditRequest);
+        return bidDataManagerService.edit(bidId, username, bidEditRequest);
     }
 
     /**
@@ -114,7 +114,7 @@ public class BidFacadeServiceImpl implements BidFacadeService {
      * @param bidId идентификатор заявки
      */
     public void incrementBidVersion(UUID bidId) {
-        bidDataManagerService.incrementBidVersion(bidId);
+        bidDataManagerService.incrementVersion(bidId);
     }
 
     /**

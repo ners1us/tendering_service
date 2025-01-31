@@ -33,7 +33,7 @@ public class BidDatabaseServiceImpl implements BidDatabaseService {
                 .collect(Collectors.toList());
     }
 
-    public List<BidDto> getBidsByUsername(String username) {
+    public List<BidDto> getItemsByUsername(String username) {
         Employee employee = employeeRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
@@ -41,6 +41,12 @@ public class BidDatabaseServiceImpl implements BidDatabaseService {
                 .orElseThrow(() -> new ResourceNotFoundException("Bids not found"));
 
         return bids.stream()
+                .map(BidDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    public List<BidDto> getAllItems() {
+        return bidRepository.findAll().stream()
                 .map(BidDto::fromEntity)
                 .collect(Collectors.toList());
     }

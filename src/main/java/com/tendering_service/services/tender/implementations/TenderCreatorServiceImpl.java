@@ -27,7 +27,7 @@ public class TenderCreatorServiceImpl implements TenderCreatorService {
 
     private final EmployeeRepository employeeRepository;
 
-    public TenderDto createTender(TenderDto tenderDto) {
+    public TenderDto create(TenderDto tenderDto) {
         Tender tender = TenderDto.toEntity(tenderDto);
 
         if (organizationRepository.findById(tender.getOrganizationId()).isEmpty()) {

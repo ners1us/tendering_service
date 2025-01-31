@@ -24,7 +24,7 @@ public class TenderDataManagerServiceImpl implements TenderDataManagerService {
 
     private final TenderHistoryRepository tenderHistoryRepository;
 
-    public TenderDto rollbackTender(UUID tenderId, Integer targetVersion, String username) {
+    public TenderDto rollback(UUID tenderId, Integer targetVersion, String username) {
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
         TenderHistory history = tenderHistoryRepository.findByTenderIdAndVersion(tenderId, targetVersion)
@@ -42,7 +42,7 @@ public class TenderDataManagerServiceImpl implements TenderDataManagerService {
         return TenderDto.fromEntity(updatedTender);
     }
 
-    public void incrementTenderVersion(UUID tenderId) {
+    public void incrementVersion(UUID tenderId) {
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 
@@ -63,7 +63,7 @@ public class TenderDataManagerServiceImpl implements TenderDataManagerService {
         tenderHistoryRepository.save(tenderHistory);
     }
 
-    public TenderDto editTender(UUID tenderId, String username, TenderEditRequest tenderEditRequest) {
+    public TenderDto edit(UUID tenderId, String username, TenderEditRequest tenderEditRequest) {
         Tender tender = tenderRepository.findById(tenderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tender not found"));
 
