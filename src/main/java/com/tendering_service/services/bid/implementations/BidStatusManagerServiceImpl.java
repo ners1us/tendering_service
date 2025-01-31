@@ -43,7 +43,7 @@ public class BidStatusManagerServiceImpl implements BidStatusManagerService {
 
         if (username != null && !username.isEmpty()) {
             if (employeeRepository.findByUsername(username).isEmpty()) {
-                return "User does not have permission to view this bid status";
+                throw new SecurityException("User does not have permission to view this bid's status");
             }
         }
 
